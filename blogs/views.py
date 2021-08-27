@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
@@ -12,7 +12,6 @@ def check_user_match(blog, request):
 # Create your views here.
 def index(request):
     """home page for blog"""
-    # return render(request, 'blogs/index.html')
     blog_posts = BlogPost.objects.order_by('date_added')
     context = {'blog_posts': blog_posts}
     return render(request, 'blogs/index.html', context)
