@@ -1,0 +1,33 @@
+{% extends 'blogs/base.html' %}
+
+{% block page_header %}
+    <div class="jumbotron">
+        <h1 class="display-3">Write a blog.</h1>
+
+        <p class="lead">Write a blog and see what others are thinking as well</p>
+
+        <a href="{% url 'users:register' %}" class="btn btn-lg btn-primary" role="button">Register &raquo;</a>
+
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+
+<a href="{% url 'blogs:new_post' %}">Add a new post</a>
+
+    {% for blog_post in blog_posts %}
+        <div class="card mb-3">
+            <h4 class="card-header">
+            {{ blog_post.date_added|date:'M d, Y H:i' }}
+            <small><a href="{% url 'blogs:edit_post' blog_post.id %}">Edit Post</a></small>
+            </h4>
+            <div class="card-body">
+                {{ blog_post.text|linebreaks }}
+            </div>
+        </div>
+        </li>
+    {% empty %}
+        <p>No blogposts added yet</p>
+    {% endfor %}
+
+{% endblock content %}
